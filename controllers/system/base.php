@@ -31,18 +31,18 @@ class Base{
 	}
 	
 	public function loadView($view, $fullpage = true){
-		if($fullpage){
-			include("views/system/header.php");
-		}
 		$path = "views/" . $view . ".php";
 		if(file_exists($path)){
-			include($path);
+			if($fullpage){
+				include("views/system/header.php");
+				include($path);
+				include("views/system/footer.php");
+			}else{
+				include($path);
+			}
 			return true;
 		}else{
 			return false;
-		}
-		if($fullpage){
-			include("views/system/footer.php");
 		}
 	}
 	
