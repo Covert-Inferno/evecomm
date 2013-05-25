@@ -16,7 +16,7 @@ class Settings{
 	// Corporations that are in a whitelisted alliance don't need to be added here.
 	// To find out your CorporationID, use an account API key to connect to the following URL:
 	// https://api.eveonline.com/account/Characters.xml.aspx?keyID=<insert your key id here>&vCode=<insert your verification code here>
-	public $corporationwhitelits = array('1');
+	public $corporationwhitelist = array('1');
 	
 	// Admin character name.
 	// This is used in (for example) the request URL's to eve-marketdata.com so they can contact you in case of issues and shown to users for technical support.
