@@ -1,4 +1,4 @@
-evecomm
+EVEComm
 =======
 
 A communication platform for EVE Online alliances
