@@ -1,14 +1,9 @@
 <?php
 
-class Eveapi{
+class Eveapi extends Controller{
 	private $keyid = "";
 	private $vcode = "";
-	private $base;
-	
-	function __construct($base){
-		$this->base = $base;
-	}
-	
+		
 	function setAPI($keyid, $vcode){
 		if(isset($keyid) && isset($vcode)){
 			$this->keyid = $keyid;
@@ -17,10 +12,6 @@ class Eveapi{
 		}else{
 			return false;
 		}
-	}
-	
-	public function index(){
-		$this->base->loadView("nocontent");
 	}
 	
 }
