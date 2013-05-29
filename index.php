@@ -2,8 +2,8 @@
 include("settings.php");
 $settings = new Settings();
 include("controllers/system/base.php");
-$base = new Base($settings);
 include("controllers/system/controller.php");
+$base = new Base($settings);
 $eveapi = $base->loadController("system/eveapi");
 if(isset($_SESSION["login"])){
 	if(isset($_GET["controller"])){

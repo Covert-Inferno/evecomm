@@ -3,7 +3,9 @@
 class Base{
 	private $base;
 	private $settings;
-
+	
+	public $database;
+	
 	private $pagetitle = "Home";
 
 	function __construct($settings){
@@ -13,6 +15,13 @@ class Base{
 		}
 		$this->base = $this;
 		$this->settings = $settings;
+		$this->base->loadController('system/database');
+		$this->database = new Database($this->base);
+		$this->database->db_host = $settings->db_host;
+		$this->database->db_user = $settings->db_user;
+		$this->database->db_pass = $settings->db_pass;
+		$this->database->db_name = $settings->db_name;
+		$this->database->connect();
 	}
 	
 	public function loadController($controller){
