@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `board_channels` (
   `title` varchar(32) COLLATE utf16_unicode_ci NOT NULL,
   `rights` int(1) unsigned NOT NULL,
   PRIMARY KEY (`boardID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci AUTO_INCREMENT=1000 ;
 
 --
 -- Dumping data for table `board_channels`
@@ -47,6 +47,33 @@ CREATE TABLE IF NOT EXISTS `board_posts` (
 
 INSERT INTO `board_posts` (`postID`, `title`, `replyTo`, `datetime`, `content`, `poster`, `channel`, `type`) VALUES
 (1, 'Welcome to EVEComm!', 0, 1372843699, 'Welcome to EVEComm!\r\n\r\nThis is the default topic of the board module. For more information, please visit: http://github.com/DoogeJ/evecomm', 1, 1, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `language`
+--
+
+CREATE TABLE IF NOT EXISTS `language` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `shortname` varchar(32) COLLATE utf16_unicode_ci NOT NULL,
+  `language` varchar(2) COLLATE utf16_unicode_ci NOT NULL DEFAULT 'en',
+  `string` tinytext COLLATE utf16_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `language`
+--
+
+INSERT INTO `language` (`id`, `shortname`, `language`, `string`) VALUES
+(1, 'Please login', 'en', 'Please login'),
+(2, 'Please login', 'nl', 'Inloggen'),
+(3, 'Login', 'en', 'Login'),
+(4, 'Login', 'nl', 'Inloggen'),
+(5, 'Username', 'nl', 'Gebruikersnaam'),
+(6, 'Password', 'nl', 'Wachtwoord'),
+(7, 'Register', 'nl', 'Registreren');
 
 -- --------------------------------------------------------
 
@@ -125,7 +152,7 @@ INSERT INTO `settings` (`option`, `value`) VALUES
 CREATE TABLE IF NOT EXISTS `users` (
   `userID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(64) COLLATE utf16_unicode_ci NOT NULL,
-  `password` varchar(40) COLLATE utf16_unicode_ci NOT NULL,
+  `password` varchar(64) COLLATE utf16_unicode_ci NOT NULL,
   `eveCharacterID` int(10) unsigned NOT NULL,
   `eveCorporationID` int(10) unsigned NOT NULL,
   `eveAllianceID` int(10) unsigned NOT NULL,
@@ -133,11 +160,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `eveApiVcode` varchar(128) COLLATE utf16_unicode_ci NOT NULL,
   `status` varchar(1) COLLATE utf16_unicode_ci NOT NULL DEFAULT '1',
   `rights` int(10) unsigned NOT NULL DEFAULT '1',
-  `language` varchar(2) COLLATE utf16_unicode_ci NOT NULL DEFAULT 'EN',
+  `language` varchar(2) COLLATE utf16_unicode_ci NOT NULL DEFAULT 'en',
   `registrationDate` int(10) unsigned NOT NULL,
   `lastLoginDate` int(10) unsigned NOT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
