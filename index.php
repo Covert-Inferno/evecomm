@@ -3,6 +3,7 @@ include("settings.php");
 $settings = new Settings();
 include("controllers/system/base.php");
 include("controllers/system/controller.php");
+include("controllers/system/model.php");
 $base = new Base($settings);
 $eveapi = $base->loadController("system/eveapi");
 if(isset($_SESSION["login"])){
@@ -13,6 +14,8 @@ if(isset($_SESSION["login"])){
 		}else{
 			$controller->index();
 		}
+	}else{
+		$base->loadView("dashboard");
 	}
 }else{
 	$login = $base->loadController("system/login");

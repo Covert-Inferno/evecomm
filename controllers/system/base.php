@@ -2,9 +2,10 @@
 
 class Base{
 	private $base;
-	private $settings;
-	
+
+	public $settings;
 	public $database;
+	public $language;
 	
 	private $pagetitle = "Home";
 
@@ -15,13 +16,13 @@ class Base{
 		}
 		$this->base = $this;
 		$this->settings = $settings;
-		$this->base->loadController('system/database');
-		$this->database = new Database($this->base);
-		$this->database->db_host = $settings->db_host;
-		$this->database->db_user = $settings->db_user;
-		$this->database->db_pass = $settings->db_pass;
-		$this->database->db_name = $settings->db_name;
-		$this->database->connect();
+		
+		//database controller can not be loaded using the loadController method since there are extra parameters
+		require_once('controllers/system/database.php');
+		$this->database = new Database($this->base, $settings->db_host, $settings->db_name, $settings->db_user, $settings->db_pass);
+		
+		//load multilanguage support
+		$this->language = $this->base->loadController("system/language");
 	}
 	
 	public function loadController($controller){
@@ -43,6 +44,7 @@ class Base{
 		$path = "views/" . $view . ".php";
 		if(file_exists($path)){
 			if($fullpage){
+				$this->pagetitle = $this->base->language->getString($this->pagetitle);
 				include("views/system/header.php");
 				include($path);
 				include("views/system/footer.php");
@@ -50,6 +52,20 @@ class Base{
 				include($path);
 			}
 			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public function loadModel($model){
+		$path = "models/" . $model . ".php";
+		if(file_exists($path)){
+			require_once($path);
+			$c = explode("/", $model);
+			$model = end($c);
+			$classname = ucfirst($model);
+			$class = new $classname($this->base);
+			return $class;
 		}else{
 			return false;
 		}

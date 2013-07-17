@@ -19,7 +19,6 @@
 			height: 35px;
 			font-size: 20px;
 			padding: 5px;
-			margin-bottom: 10px;
 			color: #fff;
 			background-color: #000;
 		}
@@ -27,6 +26,7 @@
 		.content{
 			width: 100%;
 			padding: 2px;
+			padding-top: 6px;
 		}
 		
 		.dialog{
@@ -34,6 +34,7 @@
 			width: 500px;
 			border: 1px #000 solid;
 		}
+		
 		.dialogtitle{
 			width: 100%;
 			background-color: #000;
@@ -42,11 +43,63 @@
 			font-size: 16px;
 			padding: 5px;
 		}
+		
 		.dialogcontent{
 			padding: 5px;
+		}
+		
+		input{
+			padding: 2px;
+			font-size: 13px;
+		}
+		
+		a{
+			text-decoration: none;
+			color: #f00;
+		}
+		
+		a:hover{
+			color: #f90;
+		}
+		
+		.footer{
+			width: 600px;
+			margin: 0px auto;
+			color: #aaa;
+			text-align: center;
+			padding: 10px;
+		}
+		
+		.menu{
+			background-color: #303030;
+			padding: 5px;
+			height: 26px;
+			color: #fff;
+		}
+		.menulinks{
+			float: left;
+		}
+		.menuoptions{
+			float: right;
 		}
 	</style>
 </head>
 <body>
 <div class="topbar"><?php echo($this->settings->title); ?> :: <?php echo($this->pagetitle); ?></div>
+<?php
+if(isset($_SESSION["login"])){
+?>
+<div class="menu">
+<div class="menulinks">
+<a href="index.php">Home</a>
+</div>
+<div class="menuoptions">
+<?php
+echo($this->base->language->getString("Logged in as") . " <a href=\"index.php?controller=profile&user=" . $_SESSION["userid"] . "\">" . $_SESSION["username"] . "</a> (<a href=\"index.php?controller=system/login&page=logout\">" . $this->base->language->getString("Logout") . "</a>)");
+?>
+</div>
+</div>
+<?php
+}
+?>
 <div class="content">
